@@ -20,6 +20,13 @@ export default (req: any, res: any) => {
             };
         });
 
+    images.sort((a, b) => {
+        const aDate = new Date(a.folder),
+            bDate = new Date(b.folder);
+
+        return bDate.getTime() - aDate.getTime();
+    });
+
     res.statusCode = 200;
     res.json(images);
 };
