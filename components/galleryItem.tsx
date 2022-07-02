@@ -63,6 +63,7 @@ export default function HeadComponent({
                         {!images && "Loading..."}
                         {images.map((image) => (
                             <div
+                                key={image.toString()}
                                 className={styles.image}
                                 onClick={() => {
                                     clickHandle(`/gallery/${folder}/${image}`);
