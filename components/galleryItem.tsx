@@ -2,10 +2,12 @@ import styles from "../styles/GalleryItem.module.css";
 
 export default function HeadComponent({
     folder,
-    images
+    images,
+    config
 }: {
     folder: string;
     images: string[];
+    config: any;
 }) {
     const date = new Date(folder),
         year = date.getFullYear(),
@@ -44,8 +46,18 @@ export default function HeadComponent({
     return (
         <>
             <div className={styles.item}>
-                <div className={styles.container}>
-                    <h1>{`${month}/${day}/${year}`}</h1>
+                <div
+                    className={styles.container}
+                    style={{
+                        backgroundColor: config?.background,
+                        color: config?.color
+                    }}
+                >
+                    <h1>
+                        {config?.title
+                            ? config.title
+                            : `${month}/${day}/${year}`}
+                    </h1>
 
                     <div className={styles.images}>
                         {!images && "Loading..."}

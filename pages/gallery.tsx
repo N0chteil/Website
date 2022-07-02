@@ -20,8 +20,10 @@ const Gallery: NextPage = () => {
                 <main className={styles.items}>
                     {data?.map((item: any) => (
                         <GalleryItemComp
+                            key={item.folder}
                             folder={item.folder}
                             images={item.images}
+                            config={item.config}
                         />
                     ))}
                 </main>
