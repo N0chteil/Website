@@ -1,0 +1,26 @@
+.footer {
+    padding: 2rem 0;
+    border-top: 1px solid #eaeaea;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    display: block;
+    color: #81bbe5;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    margin-top: 20px;
+}
+
+.footer a,
+.footer > div:not(.heading) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
