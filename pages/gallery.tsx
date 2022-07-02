@@ -17,7 +17,12 @@ const Gallery: NextPage = () => {
             <HeadComp title={"Gallery"} />
 
             <div className={styles.container}>
-                <main className={styles.items}>
+                <main
+                    className={styles.items}
+                    style={{
+                        columnCount: data?.length > 1 ? 2 : 1
+                    }}
+                >
                     {data?.map((item: any) => (
                         <GalleryItemComp
                             key={item.folder}
