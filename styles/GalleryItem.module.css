@@ -58,10 +58,18 @@
     .images {
         column-count: 1;
     }
+
+    .imageModal img {
+        width: 100% !important;
+    }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1200px) {
     .images {
         column-count: 2;
+    }
+
+    .imageModal img {
+        width: 100% !important;
     }
 }
