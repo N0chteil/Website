@@ -33,6 +33,8 @@ export default function HeadComponent({
             };
         });
 
+        if (img.width > img.height) img.style.width = "100%";
+
         modal.appendChild(img);
 
         document.body.appendChild(modal);
