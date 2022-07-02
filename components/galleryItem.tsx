@@ -20,15 +20,18 @@ export default function HeadComponent({
         document.body.style.overflow = "hidden";
 
         img.src = src;
-        img.onclick = () => {
-            document.body.style.overflow = "";
-
-            modal.remove();
-            background.remove();
-        };
 
         modal.className = styles.imageModal;
         background.className = styles.imageModalBackground;
+
+        [modal, background].forEach((ele) => {
+            ele.onclick = () => {
+                document.body.style.overflow = "";
+
+                modal.remove();
+                background.remove();
+            };
+        });
 
         modal.appendChild(img);
 
