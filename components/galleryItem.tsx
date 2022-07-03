@@ -66,12 +66,14 @@ export default function HeadComponent({
                                 key={image.toString()}
                                 className={styles.image}
                                 onClick={() => {
-                                    clickHandle(`/gallery/${folder}/${image}`);
+                                    clickHandle(
+                                        `https://cdn.zephra.cloud/image/other/frederik/gallery/${folder}/${image}`
+                                    );
                                 }}
                             >
                                 <img
                                     className={styles.imageImg}
-                                    src={`/gallery/${folder}/${image}`}
+                                    src={`https://cdn.zephra.cloud/image/other/frederik/gallery/${folder}/${image}`}
                                     alt={image}
                                 />
                             </div>
