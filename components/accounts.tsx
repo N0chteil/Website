@@ -1,5 +1,6 @@
 import styles from "../styles/Accounts.module.css";
 import React, { useEffect } from "react";
+import Image from "next/image";
 
 export default function AccountsComponent() {
     const profiles = {
@@ -21,6 +22,11 @@ export default function AccountsComponent() {
                 },
                 username: "N0chteil ^^#6257",
                 url: "https://discord.com/users/495901098926669825"
+            },
+            {
+                platform: "Duolingo",
+                username: "N0chteil",
+                url: "https://www.duolingo.com/profile/ElFrederik"
             },
             {
                 platform: "Reddit",
@@ -135,10 +141,17 @@ export default function AccountsComponent() {
                             }}
                         >
                             <div className={styles.icon}>
-                                <i
-                                    className={profile.icon["font-awesome"]}
-                                    style={{ color: profile.icon.color }}
-                                ></i>
+                                {profile.icon ? (
+                                    <i
+                                        className={profile.icon["font-awesome"]}
+                                        style={{ color: profile.icon.color }}
+                                    ></i>
+                                ) : (
+                                    <img
+                                        className={styles.iconImage}
+                                        src={`/profiles/${profile.platform}.svg`}
+                                    ></img>
+                                )}
                             </div>
                             <div className={styles.name}>
                                 <span className={styles.profileLink}>
