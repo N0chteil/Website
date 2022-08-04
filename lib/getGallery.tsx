@@ -1,9 +1,13 @@
 export async function getGallery() {
-    const gallery = await fetch(
+    let gallery: any = await fetch(
         "https://cdn.zephra.cloud/image/other/frederik/gallery/"
-    ).then((res) => res.json());
+    ).then((res) => res.text());
 
-    console.log("getGallery", gallery);
+    try {
+        gallery = JSON.parse(gallery);
+    } catch (e) {
+        gallery = {};
+    }
 
     return gallery;
 }

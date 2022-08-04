@@ -7,15 +7,15 @@ import GalleryItemComp from "../components/galleryItem";
 import styles from "../styles/Gallery.module.css";
 import { getGallery } from "../lib/getGallery";
 
-const Gallery: NextPage = ({ data }: any) => {
+const Gallery: NextPage<{ data: any }> = (props) => {
     const gallery: any = [];
 
-    if (data) {
-        Object.keys(data).forEach((key) => {
-            const images = data[key].filter((image: string) =>
+    if (props.data) {
+        Object.keys(props.data).forEach((key) => {
+            const images = props.data[key].filter((image: string) =>
                     image.toLowerCase().endsWith(".jpg")
                 ),
-                config = data[key].find(
+                config = props.data[key].find(
                     (image: string) => image === "config.json"
                 );
 
@@ -35,7 +35,7 @@ const Gallery: NextPage = ({ data }: any) => {
                 <main
                     className={styles.items}
                     style={{
-                        columnCount: data?.length > 1 ? 2 : 1
+                        columnCount: props.data?.length > 1 ? 2 : 1
                     }}
                 >
                     {gallery?.map((item: any) => (
