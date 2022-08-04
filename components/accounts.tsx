@@ -123,7 +123,10 @@ export default function AccountsComponent() {
 
             <div className={styles.profiles}>
                 {selectedType.map((profile: any) => (
-                    <div className={styles.profileContainer}>
+                    <div
+                        className={styles.profileContainer}
+                        key={profile.platform}
+                    >
                         <div
                             className={styles.profile}
                             key={profile.platform}
