@@ -17,6 +17,14 @@ export default function FooterComponent() {
                 >
                     Imprint
                 </a>
+
+                <a
+                    href="https://github.com/N0chteil/Website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
+                </a>
             </div>
         </footer>
     );
