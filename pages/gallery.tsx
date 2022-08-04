@@ -3,15 +3,12 @@ import type { NextPage } from "next";
 import HeadComp from "../components/head";
 import FooterComp from "../components/footer";
 import GalleryItemComp from "../components/galleryItem";
-import useSWR from "swr";
 
 import styles from "../styles/Gallery.module.css";
+import { getGallery } from "../lib/getGallery";
 
-const Gallery: NextPage = () => {
-    const { data } = useSWR("/api/gallery", (url) =>
-            fetch(url).then((res) => res.json())
-        ),
-        gallery: any = [];
+const Gallery: NextPage = ({ data }: any) => {
+    const gallery: any = [];
 
     if (data) {
         Object.keys(data).forEach((key) => {
@@ -56,5 +53,13 @@ const Gallery: NextPage = () => {
         </>
     );
 };
+
+export async function getServerSideProps() {
+    return {
+        props: {
+            data: await getGallery()
+        }
+    };
+}
 
 export default Gallery;
