@@ -25,7 +25,7 @@ export default function AccountsComponent() {
             },
             {
                 platform: "Duolingo",
-                username: "N0chteil",
+                username: "ElFrederik",
                 url: "https://www.duolingo.com/profile/ElFrederik"
             },
             {
