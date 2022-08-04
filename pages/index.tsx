@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import HeadComp from "../components/head";
 import FooterComp from "../components/footer";
+import AccountsComp from "../components/accounts";
 
 import styles from "../styles/Home.module.css";
 
@@ -68,6 +69,8 @@ const Home: NextPage = () => {
                         </a>
                     </div>
                 </main>
+
+                <AccountsComp></AccountsComp>
 
                 <FooterComp />
             </div>

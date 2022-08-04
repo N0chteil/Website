@@ -1,0 +1,103 @@
+.container {
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.selection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 20px;
+    user-select: none;
+}
+
+.selectionItemContainer {
+    position: relative;
+    flex: 50%;
+    box-sizing: border-box;
+}
+
+.selectionItem {
+    width: 90%;
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 16px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+.selectionItem.selected {
+    background-color: #00a8ff;
+    color: #fff;
+}
+
+.profiles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 20px 20px 0 20px;
+    margin-top: 25px;
+    user-select: none;
+}
+
+.profileContainer {
+    position: relative;
+    flex: 50% 0;
+    box-sizing: border-box;
+}
+
+.profile {
+    position: relative;
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    cursor: pointer;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.profile .icon {
+    flex: 15%;
+    font-size: 30px;
+}
+
+.profile .name {
+    flex: 85%;
+    position: relative;
+    margin-left: 5px;
+}
+
+@media screen and (max-device-width: 800px), (max-width: 800px) {
+    .container {
+        width: 90%;
+    }
+
+    .selectionItemContainer,
+    .profileContainer {
+        flex: 100%;
+    }
+
+    .selectionItemContainer:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
