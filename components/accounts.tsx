@@ -150,6 +150,7 @@ export default function AccountsComponent() {
                                     <img
                                         className={styles.iconImage}
                                         src={`/profiles/${profile.platform}.svg`}
+                                        alt={`${profile.platform} logo`}
                                     ></img>
                                 )}
                             </div>
