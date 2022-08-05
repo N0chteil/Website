@@ -35,6 +35,16 @@
     box-sizing: border-box;
 }
 
+.selectionItem,
+.profile {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.selectionItem:hover,
+.profile:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 .selectionItem.selected {
     background-color: #00a8ff;
     color: #fff;
