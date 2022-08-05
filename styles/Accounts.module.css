@@ -46,7 +46,7 @@
 }
 
 .selectionItem.selected {
-    background-color: #00a8ff;
+    background-color: rgba(0, 168, 255, 0.75);
     color: #fff;
 }
 
