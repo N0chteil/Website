@@ -13,7 +13,7 @@ export default function DeviceHistoryComponent() {
                         <div className={styles.icon}>
                             <Image
                                 src="/devices/apple/ipod-2.png"
-                                width={50}
+                                width={18.6}
                                 height={36.6}
                             ></Image>
                         </div>
@@ -32,7 +32,7 @@ export default function DeviceHistoryComponent() {
                         <div className={styles.icon}>
                             <Image
                                 src="/devices/apple/iphone-5.png"
-                                width={50}
+                                width={15.8}
                                 height={36.6}
                             ></Image>
                         </div>
@@ -49,7 +49,7 @@ export default function DeviceHistoryComponent() {
                         <div className={styles.icon}>
                             <Image
                                 src="/devices/apple/ipod-5.png"
-                                width={50}
+                                width={15.8}
                                 height={36.6}
                             ></Image>
                         </div>
@@ -87,7 +87,7 @@ export default function DeviceHistoryComponent() {
                         <div className={styles.icon}>
                             <Image
                                 src="/devices/apple/iphone-x.png"
-                                width={50}
+                                width={17.1}
                                 height={36.6}
                             ></Image>
                         </div>
@@ -104,7 +104,7 @@ export default function DeviceHistoryComponent() {
                         <div className={styles.icon}>
                             <Image
                                 src="/devices/apple/iphone-8plus.png"
-                                width={50}
+                                width={17}
                                 height={36.6}
                             ></Image>
                         </div>
@@ -121,7 +121,7 @@ export default function DeviceHistoryComponent() {
                         <div className={styles.icon}>
                             <Image
                                 src="/devices/apple/iphone-14pro.png"
-                                width={50}
+                                width={16.5}
                                 height={36.6}
                             ></Image>
                         </div>
