@@ -73,6 +73,8 @@
 }
 
 .icon {
+    user-select: none;
+    pointer-events: none;
     text-align: center;
     flex: 15%;
 }
