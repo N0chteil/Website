@@ -88,17 +88,15 @@
 
 .profile .icon {
     position: relative;
+    display: flex;
+    justify-content: center;
     flex: 15%;
     font-size: 30px;
 }
 
 .profile .icon .iconImage {
-    position: absolute;
     width: 30px;
     height: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
 }
 
 .profile .name {
