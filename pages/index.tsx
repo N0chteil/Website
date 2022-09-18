@@ -3,7 +3,9 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import HeadComp from "../components/head";
 import FooterComp from "../components/footer";
+import DeviceHistoryComp from "../components/deviceHistory";
 import AccountsComp from "../components/accounts";
+import PlaceholderComp from "../components/placeholder";
 
 import styles from "../styles/Home.module.css";
 
@@ -70,8 +72,9 @@ const Home: NextPage = () => {
                     </div>
                 </main>
 
+                <DeviceHistoryComp></DeviceHistoryComp>
+                <PlaceholderComp></PlaceholderComp>
                 <AccountsComp></AccountsComp>
-
                 <FooterComp />
             </div>
         </>
