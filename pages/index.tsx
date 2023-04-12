@@ -21,6 +21,7 @@ const Home: NextPage = () => {
                             src="/avatar.jpg"
                             width={250}
                             height={250}
+                            alt="Avatar"
                         ></Image>
                     </div>
 
