@@ -59,19 +59,19 @@ export default function HeadComponent({
 
         const images = Array.from(imagesContainer.current.querySelectorAll("img"));
 
-        function updateStatus(imagesLoaded: HTMLImageElement[]) {
+        function updateStatus() {
             setLoadedImages(
                 images.map((image) => image.complete).every((item) => item)
             );
         }
 
-        updateStatus(images);
+        updateStatus();
 
         images.forEach((image) => {
-            image.addEventListener("load", () => updateStatus(images), {
+            image.addEventListener("load", updateStatus, {
                 once: true
             });
-            image.addEventListener("error", () => updateStatus(images), {
+            image.addEventListener("error", updateStatus, {
                 once: true
             });
         });
