@@ -39,6 +39,12 @@
     height: auto;
 }
 
+.loading {
+    text-align: center;
+    user-select: none;
+    pointer-events: none;
+}
+
 .images {
     max-width: 100%;
     column-count: 3;
@@ -49,6 +55,10 @@
     margin: 1rem;
     text-align: center;
     cursor: pointer;
+}
+
+.image:first-child {
+    margin-top: 0;
 }
 
 .imageImg {

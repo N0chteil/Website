@@ -1,14 +1,25 @@
+import { useEffect, useRef, useState } from "react";
+
+import Image from "next/image";
+
 import styles from "../styles/GalleryItem.module.css";
 
+import type { GalleryDataItem } from "../lib/getGallery";
+
+
 export default function HeadComponent({
-    folder,
-    images,
-    config
-}: {
+                                          folder,
+                                          images,
+                                          config
+                                      }: {
     folder: string;
-    images: string[];
+    images: GalleryDataItem[];
     config: any;
 }) {
+    const imagesContainer = useRef<HTMLDivElement>(null);
+
+    const [loadedImages, setLoadedImages] = useState(false);
+
     const date = new Date(folder),
         year = date.getFullYear(),
         month = date.getMonth() + 1,
@@ -43,6 +54,29 @@ export default function HeadComponent({
         document.body.appendChild(background);
     }
 
+    useEffect(() => {
+        if (!imagesContainer.current) return;
+
+        const images = Array.from(imagesContainer.current.querySelectorAll("img"));
+
+        function updateStatus(imagesLoaded: HTMLImageElement[]) {
+            setLoadedImages(
+                images.map((image) => image.complete).every((item) => item)
+            );
+        }
+
+        updateStatus(images);
+
+        images.forEach((image) => {
+            image.addEventListener("load", () => updateStatus(images), {
+                once: true
+            });
+            image.addEventListener("error", () => updateStatus(images), {
+                once: true
+            });
+        });
+    }, [imagesContainer]);
+
     return (
         <>
             <div className={styles.item}>
@@ -59,22 +93,35 @@ export default function HeadComponent({
                             : `${month}/${day}/${year}`}
                     </h1>
 
-                    <div className={styles.images}>
-                        {!images && "Loading..."}
+                    <div className={styles.loading} style={{ display: loadedImages ? "none" : "block" }}>
+                        <Image
+                            src={"/rings.svg"}
+                            width={100}
+                            height={100}
+                            alt={"rings"}
+                        />
+                    </div>
+
+                    <div
+                        className={styles.images}
+                        style={{ display: loadedImages ? "block" : "none" }}
+                        ref={imagesContainer}
+                    >
                         {images.map((image) => (
                             <div
-                                key={image.toString()}
+                                key={image.name}
                                 className={styles.image}
                                 onClick={() => {
                                     clickHandle(
-                                        `https://cdn.zephra.cloud/image/other/frederik/gallery/${folder}/${image}`
+                                        `https://gallery.frederik.life/${folder}/${image.name}`
                                     );
                                 }}
                             >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     className={styles.imageImg}
-                                    src={`https://cdn.zephra.cloud/image/other/frederik/gallery/${folder}/${image}`}
-                                    alt={image}
+                                    src={`https://gallery.frederik.life/${folder}/${image.name}`}
+                                    alt={image.name}
                                 />
                             </div>
                         ))}

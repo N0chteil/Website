@@ -1,28 +1,30 @@
-import type { NextPage } from "next";
+import { getGallery } from "../lib/getGallery";
 
 import HeadComp from "../components/head";
 import FooterComp from "../components/footer";
 import GalleryItemComp from "../components/galleryItem";
 
 import styles from "../styles/Gallery.module.css";
-import { getGallery } from "../lib/getGallery";
 
-const Gallery: NextPage<{ data: any }> = (props) => {
+import type { NextPage } from "next";
+import type { GalleryData } from "../lib/getGallery";
+
+const Gallery: NextPage<{ data: GalleryData }> = (props) => {
     const gallery: any = [];
 
     if (props.data) {
         Object.keys(props.data).forEach((key) => {
-            const images = props.data[key].filter((image: string) =>
-                    image.toLowerCase().endsWith(".jpg")
+            const images = props.data[key].filter((image) =>
+                    image.name.toLowerCase().endsWith(".jpg")
                 ),
                 config = props.data[key].find(
-                    (image: string) => image === "config.json"
+                    (image) => image.name === "config.json"
                 );
 
             gallery.push({
                 folder: key,
                 images,
-                config
+                config: config?.name
             });
         });
     }
@@ -32,10 +34,18 @@ const Gallery: NextPage<{ data: any }> = (props) => {
             <HeadComp title={"Gallery"} />
 
             <div className={styles.container}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Gallery</h1>
+
+                    <p className={styles.description}>
+                        The photos are stored in the US, so they might take a while to load for the first time.
+                    </p>
+                </div>
+
                 <main
                     className={styles.items}
                     style={{
-                        columnCount: props.data?.length > 1 ? 2 : 1
+                        columnCount: gallery?.length > 1 ? 2 : 1
                     }}
                 >
                     {gallery?.map((item: any) => (
