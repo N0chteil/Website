@@ -1,8 +1,12 @@
+import { useState } from "react";
+
 import Image from "next/image";
 
 import styles from "../styles/DeviceHistory.module.css";
 
 export default function DeviceHistoryComponent() {
+    const [timelineActive, setTimelineActive] = useState(false);
+
     const devices = [
         {
             name: "iPod Touch 2nd Generation",
@@ -71,9 +75,15 @@ export default function DeviceHistoryComponent() {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>My Device History</h2>
+            <div className={styles.header}>
+                <h2 className={styles.title}>My Device History</h2>
 
-            <div className={styles.timeline}>
+                <button className={styles.button} onClick={() => setTimelineActive(!timelineActive)}>
+                    {timelineActive ? "Hide" : "Show"}
+                </button>
+            </div>
+
+            <div className={[styles.timeline, timelineActive ? styles.active : ""].join(" ")}>
                 {
                     devices.map((device, index) => {
                         const side = index % 2 == 0 ? styles.left : styles.right;

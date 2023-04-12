@@ -7,14 +7,48 @@
     padding: 20px;
 }
 
+.container:has(.timeline.active) .button {
+    background-color: rgba(0, 168, 255, 0.75);
+    color: #fff;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
 .title {
     text-align: center;
 }
 
+.button {
+    width: 45%;
+    height: fit-content;
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: none;
+    border-radius: 16px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 .timeline {
+    display: none;
     position: relative;
     min-height: 200px;
     margin: 0 auto;
+}
+
+.timeline.active {
+    display: block;
 }
 
 .timeline::after {
@@ -93,6 +127,14 @@
 }
 
 @media screen and (max-device-width: 800px), (max-width: 800px) {
+    .header {
+        grid-template-columns: 1fr;
+    }
+
+    .button {
+        width: 90%;
+    }
+
     .timeline::after,
     .timelineItem::before {
         display: none;
