@@ -1,6 +1,6 @@
+import { useState } from "react";
+
 import styles from "../styles/Accounts.module.css";
-import React, { useEffect } from "react";
-import Image from "next/image";
 
 export default function AccountsComponent() {
     const profiles = {
@@ -80,7 +80,7 @@ export default function AccountsComponent() {
         ]
     };
 
-    let [selectedType, setSelectedType] = React.useState(
+    let [selectedType, setSelectedType] = useState(
             profiles.private.concat(profiles.shared)
         ),
         selected: string;
