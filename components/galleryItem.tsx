@@ -32,6 +32,10 @@ export default function HeadComponent({
 
         document.body.style.overflow = "hidden";
 
+        img.onload = () => {
+            if (img.width > img.height) img.style.width = "100%";
+        };
+
         img.src = src;
 
         modal.className = styles.imageModal;
@@ -45,8 +49,6 @@ export default function HeadComponent({
                 background.remove();
             };
         });
-
-        if (img.width > img.height) img.style.width = "100%";
 
         modal.appendChild(img);
 
