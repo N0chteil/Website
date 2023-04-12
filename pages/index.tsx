@@ -1,5 +1,4 @@
-import type { NextPage } from "next";
-
+import Link from "next/link";
 import Image from "next/image";
 import HeadComp from "../components/head";
 import FooterComp from "../components/footer";
@@ -8,8 +7,11 @@ import AccountsComp from "../components/accounts";
 import PlaceholderComp from "../components/placeholder";
 
 import styles from "../styles/Home.module.css";
+import general from "../styles/General.module.css";
 
-const Home: NextPage = () => {
+import type { NextPage } from "next";
+
+export default function Home() {
     return (
         <>
             <HeadComp />
@@ -37,11 +39,21 @@ const Home: NextPage = () => {
 
                 <DeviceHistoryComp></DeviceHistoryComp>
                 <PlaceholderComp></PlaceholderComp>
+
+                <div className={[general.container, general.item].join(" ")}>
+                    <div className={general.header}>
+                        <h2 className={general.title}>Photo Gallery</h2>
+
+                        <Link href={"/gallery"}>
+                            <span className={[general.button, styles.button].join(" ")}>Open</span>
+                        </Link>
+                    </div>
+                </div>
+
+                <PlaceholderComp></PlaceholderComp>
                 <AccountsComp></AccountsComp>
                 <FooterComp />
             </div>
         </>
     );
 };
-
-export default Home;
