@@ -147,6 +147,7 @@ export default function AccountsComponent() {
                                         style={{ color: profile.icon.color }}
                                     ></i>
                                 ) : (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img
                                         className={styles.iconImage}
                                         src={`/profiles/${profile.platform}.svg`}
