@@ -1,10 +1,12 @@
 import { getGallery } from "../lib/getGallery";
 
+import Link from "next/link";
 import HeadComp from "../components/head";
 import FooterComp from "../components/footer";
 import GalleryItemComp from "../components/galleryItem";
 
 import styles from "../styles/Gallery.module.css";
+import general from "../styles/General.module.css";
 
 import type { NextPage } from "next";
 import type { GalleryData } from "../lib/getGallery";
@@ -40,6 +42,19 @@ const Gallery: NextPage<{ data: GalleryData }> = (props) => {
                     <p className={styles.description}>
                         The photos are stored in the US, so they might take a while to load for the first time.
                     </p>
+
+                    <Link href={"/"}>
+                        <span
+                            className={general.button}
+                            style={{
+                                display: "block",
+                                width: "fit-content",
+                                margin: "20px auto"
+                            }}
+                        >
+                            Back to Home
+                        </span>
+                    </Link>
                 </div>
 
                 <main
