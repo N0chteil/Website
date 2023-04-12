@@ -9,8 +9,6 @@ import PlaceholderComp from "../components/placeholder";
 import styles from "../styles/Home.module.css";
 import general from "../styles/General.module.css";
 
-import type { NextPage } from "next";
-
 export default function Home() {
     return (
         <>
