@@ -11,11 +11,11 @@ export default function FooterComponent() {
 
             <div className={styles.container}>
                 <a
-                    href="https://www.zephra.cloud/legal/imprint"
+                    href="https://www.zephra.cloud/legal/notice"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Imprint
+                    Legal Notice
                 </a>
 
                 <a
