@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 import styles from "../styles/DeviceHistory.module.css";
+import general from "../styles/General.module.css";
 
 export default function DeviceHistoryComponent() {
     const [timelineActive, setTimelineActive] = useState(false);
@@ -74,13 +75,16 @@ export default function DeviceHistoryComponent() {
     ];
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <h2 className={styles.title}>My Device History</h2>
+        <div className={[general.container, general.item, styles.container].join(" ")}>
+            <div className={general.header}>
+                <h2 className={general.title}>My Device History</h2>
 
-                <button className={styles.button} onClick={() => setTimelineActive(!timelineActive)}>
+                <span
+                    className={[general.button, styles.button].join(" ")}
+                    onClick={() => setTimelineActive(!timelineActive)}
+                >
                     {timelineActive ? "Hide" : "Show"}
-                </button>
+                </span>
             </div>
 
             <div className={[styles.timeline, timelineActive ? styles.active : ""].join(" ")}>
