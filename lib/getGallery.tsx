@@ -16,6 +16,7 @@ export async function getGallery() {
     try {
         gallery = JSON.parse(gallery);
     } catch (e) {
+        console.log("gallery", gallery);
         console.error(e);
 
         gallery = {};
