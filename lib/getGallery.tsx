@@ -1,6 +1,16 @@
+export interface GalleryData {
+    [key: string]: GalleryDataItem[];
+}
+
+export interface GalleryDataItem {
+    name: string;
+    width: number;
+    height: number;
+}
+
 export async function getGallery() {
     let gallery: any = await fetch(
-        "https://cdn.zephra.cloud/image/other/frederik/gallery/"
+        "https://gallery.frederik.life/"
     ).then((res) => res.text());
 
     try {
