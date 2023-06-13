@@ -11,6 +11,7 @@ export default function DeviceHistoryComponent() {
     const devices = [
         {
             name: "iPod Touch 2nd Generation",
+            brand: "Apple",
             specs: "-",
             image: {
                 src: "/devices/apple/ipod-2.png",
@@ -20,6 +21,7 @@ export default function DeviceHistoryComponent() {
         },
         {
             name: "iPhone 5",
+            brand: "Apple",
             specs: "32 GB, White",
             image: {
                 src: "/devices/apple/iphone-5.png",
@@ -29,6 +31,7 @@ export default function DeviceHistoryComponent() {
         },
         {
             name: "iPod Touch 5th Generation",
+            brand: "Apple",
             specs: "32 GB, Blue",
             image: {
                 src: "/devices/apple/ipod-5.png",
@@ -38,6 +41,7 @@ export default function DeviceHistoryComponent() {
         },
         {
             name: "Huawei P Smart+",
+            brand: "Huawei",
             specs: "64 GB, Black",
             image: {
                 src: "/devices/huawei/p-smart-plus.jpg",
@@ -47,6 +51,7 @@ export default function DeviceHistoryComponent() {
         },
         {
             name: "iPhone X",
+            brand: "Apple",
             specs: "256 GB, Silver",
             image: {
                 src: "/devices/apple/iphone-x.png",
@@ -56,6 +61,7 @@ export default function DeviceHistoryComponent() {
         },
         {
             name: "iPhone 8 Plus",
+            brand: "Apple",
             specs: "256 GB, Space Gray",
             image: {
                 src: "/devices/apple/iphone-8plus.png",
@@ -65,14 +71,38 @@ export default function DeviceHistoryComponent() {
         },
         {
             name: "iPhone 14 Pro",
+            brand: "Apple",
             specs: "256 GB, Space Black",
             image: {
                 src: "/devices/apple/iphone-14pro.png",
                 width: 16.5,
                 height: 36.6
             }
+        },
+        {
+            name: "MacBook Air 2023 15-inch",
+            brand: "Apple",
+            specs: "512 GB, 16 GB RAM, Space Gray",
+            image: {
+                src: "/devices/apple/macbook-air-2023-15-inch.png",
+                width: 40,
+                height: 29.33
+            }
         }
     ];
+
+    const brands = devices.map((device) => device.brand);
+    const brandRatio = brands.reduce((acc: {
+        [key: string]: number
+    }, brand) => {
+        if (acc[brand]) {
+            acc[brand]++;
+        } else {
+            acc[brand] = 1;
+        }
+
+        return acc;
+    }, {});
 
     return (
         <div className={[general.container, general.item, styles.container].join(" ")}>
@@ -85,6 +115,18 @@ export default function DeviceHistoryComponent() {
                 >
                     {timelineActive ? "Hide" : "Show"}
                 </span>
+            </div>
+
+            <div className={[styles.brandRatio, timelineActive ? styles.active : ""].join(" ")}>
+                {
+                    Object.keys(brandRatio).map((brand) => {
+                        return (
+                            <h3 className={styles.brand} key={brand}>
+                                {brand} <span className={styles.brandRatioPercentage}>{brandRatio[brand] * 100 / devices.length}%</span> ({brandRatio[brand]})
+                            </h3>
+                        );
+                    })
+                }
             </div>
 
             <div className={[styles.timeline, timelineActive ? styles.active : ""].join(" ")}>
