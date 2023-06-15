@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 
@@ -6,7 +6,11 @@ import styles from "../styles/DeviceHistory.module.css";
 import general from "../styles/General.module.css";
 
 export default function DeviceHistoryComponent() {
-    const [timelineActive, setTimelineActive] = useState(false);
+    const [timelineActive, setTimelineActive] = useState(false),
+        [timelineOpening, setTimelineOpening] = useState(false),
+        [timelineClosing, setTimelineClosing] = useState(false);
+
+    const contentRef = useRef(null);
 
     const devices = [
         {
@@ -104,61 +108,134 @@ export default function DeviceHistoryComponent() {
         return acc;
     }, {});
 
+    function setFitContentHeight() {
+        // @ts-ignore
+        const content: HTMLDivElement = contentRef.current;
+
+        if (content) {
+            content.style.visibility = "hidden";
+            content.style.display = "block";
+
+            content.style.setProperty("--fitContentHeight", `${content.scrollHeight}px`);
+
+            content.style.visibility = "";
+            content.style.display = "";
+        }
+    }
+
+    function triggerTimelineTransition() {
+        // @ts-ignore
+        const content: HTMLDivElement = contentRef.current;
+
+        if (timelineActive) {
+            setTimelineActive(false);
+            setTimelineClosing(true);
+
+            if (content) {
+                setTimeout(() => {
+                    const ele: HTMLDivElement | null = content.querySelector(`div.${styles.brandRatio}`);
+
+                    if (!ele) return;
+
+                    ele.style.display = "none";
+                }, 400);
+            }
+
+            setTimeout(() => {
+                setTimelineClosing(false);
+                setTimelineActive(false);
+            }, 1000);
+        } else {
+            if (content) {
+                const ele: HTMLDivElement | null = content.querySelector(`div.${styles.brandRatio}`);
+
+                if (!ele) return;
+
+                ele.style.display = "";
+            }
+
+            setTimelineActive(false);
+            setTimelineOpening(true);
+
+            setTimeout(() => {
+                setTimelineOpening(false);
+                setTimelineActive(true);
+            }, 1000);
+        }
+    }
+
+    useEffect(() => {
+        setFitContentHeight();
+
+        if (window) {
+            window.addEventListener("resize", setFitContentHeight);
+
+            return () => {
+                window.removeEventListener("resize", setFitContentHeight);
+            };
+        }
+    }, []);
+
     return (
         <div className={[general.container, general.item, styles.container].join(" ")}>
             <div className={general.header}>
                 <h2 className={general.title}>My Device History</h2>
 
                 <span
-                    className={[general.button, styles.button].join(" ")}
-                    onClick={() => setTimelineActive(!timelineActive)}
+                    className={[general.button, styles.button, timelineOpening || timelineClosing ? general.disable : ""].join(" ")}
+                    onClick={triggerTimelineTransition}
                 >
-                    {timelineActive ? "Hide" : "Show"}
+                    {timelineActive || timelineOpening ? "Hide" : "Show"}
                 </span>
             </div>
 
-            <div className={[styles.brandRatio, timelineActive ? styles.active : ""].join(" ")}>
-                {
-                    Object.keys(brandRatio).map((brand) => {
-                        return (
-                            <h3 className={styles.brand} key={brand}>
-                                {brand} <span className={styles.brandRatioPercentage}>{brandRatio[brand] * 100 / devices.length}%</span> ({brandRatio[brand]})
-                            </h3>
-                        );
-                    })
-                }
-            </div>
+            <div
+                className={[styles.content, timelineActive ? styles.active : "", timelineOpening ? styles.transitionOpen : "", timelineClosing ? styles.transitionClose : ""].join(" ")}
+                ref={contentRef}>
+                <div className={styles.brandRatio}>
+                    {
+                        Object.keys(brandRatio).map((brand) => {
+                            return (
+                                <h3 className={styles.brand} key={brand}>
+                                    {brand} <span
+                                    className={styles.brandRatioPercentage}>{brandRatio[brand] * 100 / devices.length}%</span> ({brandRatio[brand]})
+                                </h3>
+                            );
+                        })
+                    }
+                </div>
 
-            <div className={[styles.timeline, timelineActive ? styles.active : ""].join(" ")}>
-                {
-                    devices.map((device, index) => {
-                        const side = index % 2 == 0 ? styles.left : styles.right;
+                <div className={styles.timeline}>
+                    {
+                        devices.map((device, index) => {
+                            const side = index % 2 == 0 ? styles.left : styles.right;
 
-                        return (
-                            <>
-                                <div className={[styles.timelineItem, side].join(" ")} key={device.name}>
-                                    <div className={styles.timelineContent}>
-                                        <div className={styles.icon}>
-                                            <Image
-                                                src={device.image.src}
-                                                width={device.image.width}
-                                                height={device.image.height}
-                                                alt={device.name}
-                                            ></Image>
-                                        </div>
+                            return (
+                                <>
+                                    <div className={[styles.timelineItem, side].join(" ")} key={device.name}>
+                                        <div className={styles.timelineContent}>
+                                            <div className={styles.icon}>
+                                                <Image
+                                                    src={device.image.src}
+                                                    width={device.image.width}
+                                                    height={device.image.height}
+                                                    alt={device.name}
+                                                ></Image>
+                                            </div>
 
-                                        <div className={styles.name}>
+                                            <div className={styles.name}>
                                         <span className={styles.model}>
                                             {device.name}
                                         </span>
-                                            <span>{device.specs}</span>
+                                                <span>{device.specs}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </>
-                        );
-                    })
-                }
+                                </>
+                            );
+                        })
+                    }
+                </div>
             </div>
         </div>
     );
