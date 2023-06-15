@@ -1,4 +1,4 @@
-.container:has(.timeline.active) .button {
+.container:has(.content.active) .button {
     background-color: rgba(0, 168, 255, 0.75);
     color: #fff;
 }
