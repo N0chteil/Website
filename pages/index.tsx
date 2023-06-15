@@ -1,3 +1,6 @@
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 import HeadComp from "../components/head";
@@ -10,6 +13,16 @@ import styles from "../styles/Home.module.css";
 import general from "../styles/General.module.css";
 
 export default function Home() {
+    const router = useRouter();
+
+    const [galleryLoading, setGalleryLoading] = useState(false);
+
+    useEffect(() => {
+        router.events.on("routeChangeStart", (url) => {
+            if (url === "/gallery") setGalleryLoading(true);
+        });
+    }, []);
+
     return (
         <>
             <HeadComp />
@@ -43,7 +56,11 @@ export default function Home() {
                         <h2 className={general.title}>Photo Gallery</h2>
 
                         <Link href={"/gallery"}>
-                            <span className={[general.button, styles.button].join(" ")}>Open</span>
+                            <span
+                                className={[general.button, styles.button, galleryLoading ? general.disable : ""].join(" ")}
+                            >
+                                {galleryLoading ? "Loading..." : "Open"}
+                            </span>
                         </Link>
                     </div>
                 </div>
